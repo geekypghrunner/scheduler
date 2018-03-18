@@ -1,0 +1,18 @@
+<% @users.each do |u| %>
+    <%= u.email %>
+<% end %>
+<ul>
+  <% @calendar_list.items.each do |calendar| %>
+    <li><%= calendar.summary %> (<%= calendar.id %>)</li>
+  <% end %>
+</ul>
+
+<ul>
+  <% @event_list.items.each do |event| %>
+      <% if event.start.date_time.nil? %>
+        <li><%= event.start.date %> <%= event.summary %> (<%= event.id %>)</li>
+      <% else %>
+        <li><%= event.start.date_time %> <%= event.summary %> (<%= event.id %>)</li>
+      <% end %>
+  <% end %>
+</ul>
