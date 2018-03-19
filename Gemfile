@@ -25,7 +25,7 @@ gem 'figaro'
 # Google API
 gem 'google-api-client', require: 'google/apis/calendar_v3'
 # Goolge OmniAuth
-gem 'omniauth-google-oauth2', '~> 0.2.2'
+gem 'omniauth-google-oauth2', '~> 0.5.3'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
