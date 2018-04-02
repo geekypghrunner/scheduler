@@ -1,0 +1,30 @@
+  <div class="container">
+    <div class="row">
+    <% 7.times do |i| %>
+      <div class="col-sm-3" >
+      <div class="card my-2">
+        <div class="card-header">
+          <%= (@week.start.to_date + i).to_s %>
+        </div>
+        <div class="card-body">
+          <ul>
+            <% instance_variable_get("@day_events#{i}").each do |event| %>
+              <li><% if defined? event.start.date_time %>
+                    <%= event.start.date_time %>
+                  <% end %>
+                <%= event.summary %>
+                </li>
+            <% end %>
+          </ul>
+          <hr>
+          <ul>
+            <% instance_variable_get("@day_tasks#{i}").each do |task| %>
+              <li><%= task.summary%></li>
+            <% end %>
+          </ul>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  </div>
+</div>

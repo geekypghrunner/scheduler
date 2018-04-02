@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  
+  has_many :weeks
+  has_many :tasks
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, 
   devise :database_authenticatable,:registerable,

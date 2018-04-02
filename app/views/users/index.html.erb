@@ -10,9 +10,31 @@
 <ul>
   <% @event_list.items.each do |event| %>
       <% if event.start.date_time.nil? %>
+        <% case event.start.date[0..9] %>
+          <% when ((event.start.date.to_datetime) + 2).rfc3339()[0..9] %>
+            <li><%= ((event.start.date.to_datetime) + 2).rfc3339()[0..9] %></li>
+            <li><%= event.start.date %> <%= event.summary %> (<%= event.id %>)</li>
+        <% end %>
         <li><%= event.start.date %> <%= event.summary %> (<%= event.id %>)</li>
       <% else %>
         <li><%= event.start.date_time %> <%= event.summary %> (<%= event.id %>)</li>
       <% end %>
   <% end %>
 </ul>
+
+
+<%= form_with data: {'task-form' => true}, url: user_tasks_path(current_user.id) do |form| %>
+  <%= form.hidden_field :user_id, :value => current_user.id %>
+  <%= form.label :summary %>
+  <%= form.text_field :summary %>
+  <%= form.label :todo %>
+  <%= form.check_box :todo, {:checked => "checked"} %>
+  <%= form.label :daily_task %>
+  <%= check_box_tag :daily_task %>
+  <div id="todo_date" style="display:none;">
+    <%= form.label :date %>
+    <%= form.text_field :date %>
+  </div>
+  <%= form.submit %>
+<% end %>
+

@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
 #    render json: response
   end
 
-  def events(id)
+  def events(id, start_date, end_date)
     secrets = Google::APIClient::ClientSecrets.new(
       {
         "web" =>
@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = secrets.to_authorization
 
-    @event_list = service.list_events(id, order_by: "starttime", single_events: true)
+    @event_list = service.list_events(id, order_by: "starttime", single_events: true, time_min: start_date, time_max: end_date, fields: "items(summary,id,start(date_time, date))")
 
 #    response = service.list_calendar_lists
 #    render json: response

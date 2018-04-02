@@ -4,7 +4,10 @@ Rails.application.routes.draw do
     delete 'logout', to: 'devise/sessions#destroy'
   end
   root 'users#index'
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do
+      resources :weeks, only: [:create, :show, :index]
+      resources :tasks, only: [:create, :new]
+    end
   get '/calendars', to: 'application#calendars'
 
 end

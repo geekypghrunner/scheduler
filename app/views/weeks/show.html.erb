@@ -1,0 +1,40 @@
+<div class="container">
+  <nav class="navbar">
+    <% if !@week.prior_week.nil? %>
+      <%= link_to "Prior Week", user_week_path(user_id: current_user.id, id: @week.prior_week) %>
+    <% end %>
+    <%= link_to "Next Week", user_weeks_path(user_id: current_user.id, id: params[:id]), method: :post %>
+  </nav>
+</div>
+<div id="cal_grid">
+  <%= render 'cal_week' %>
+</div>
+
+<div class="container">
+  <div class="card my-2">
+    <div class="card-header">
+      To Do
+    </div>
+    <div class="card-body">
+      <% @todos.each do |t| %>
+        <%= t.summary %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= form_with data: {'task-form' => true}, url: user_tasks_path(current_user.id) do |form| %>
+  <%= form.hidden_field :user_id, :value => current_user.id %>
+  <%= form.hidden_field :id, :value => params[:id] %>
+  <%= form.label :summary %>
+  <%= form.text_field :summary %>
+  <%= form.label :todo %>
+  <%= form.check_box :todo, {:checked => "checked"} %>
+  <%= form.label :daily_task %>
+  <%= check_box_tag :daily_task %>
+  <div id="todo_date" style="display:none;">
+    <%= form.label :date %>
+    <%= form.text_field :date, data:{ provide:'datepicker' } %>
+  </div>
+  <%= form.submit %>
+<% end %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  date: MyString
+  todo: false
+  completed: false
+  summary: MyText
+
+two:
+  user: two
+  date: MyString
+  todo: false
+  completed: false
+  summary: MyText
