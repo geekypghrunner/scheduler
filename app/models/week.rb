@@ -1,6 +1,7 @@
 class Week < ApplicationRecord
     
     belongs_to :user
+    has_many :days
     
     def dated_events
         7.times do |i|

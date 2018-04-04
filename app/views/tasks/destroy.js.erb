@@ -1,3 +1,4 @@
+$('#edit_task_<%= @task.id %>').remove();
 $('#cal_grid').html('<%= j render @days %>')
 $('#incomplete_todo_list').html('<%= j render @incomplete_todos %>')
 $('#complete_todo_list').html('<%= j render @complete_todos %>')

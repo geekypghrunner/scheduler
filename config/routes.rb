@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   end
   root 'users#index'
   resources :users, only: [:index, :show] do
-      resources :weeks, only: [:create, :show, :index]
-      resources :tasks, only: [:create, :new]
+      resources :weeks, only: [:create, :show, :index] do
+        resources :days, only: [:create, :show, :index] do
+        end
+      end
+      resources :tasks, only: [:create, :new, :edit, :update, :destroy]
     end
   get '/calendars', to: 'application#calendars'
 

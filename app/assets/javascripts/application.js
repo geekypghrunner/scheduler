@@ -1,4 +1,5 @@
 /*global $*/
+/*global jQuery */
 
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
@@ -39,5 +40,27 @@ $( document ).ready(function() {
             $("input[id=daily_task]").prop("checked","checked");
         }
     });    
-    
+    $("#new_task").bind("ajax:complete", function(event,xhr,status){
+        $("input[name=summary").val('');
+        $("input[name=date]").val('');
+        $("input[name=todo]").prop("checked","checked");
+        $("input[id=daily_task]").prop("checked","");
+        $('#todo_date').css('display', 'none');
+    });
+//    $(".edit_task").find('input[type=submit]').remove();
+//    $(".edit_task").find('input[type=checkbox]').click(function(event) {
+//        $(this).parent('form').submit();
+//  });
+
+});
+
+
+ document.addEventListener("page:change", function() {   
+    let checkboxes = document.querySelectorAll(".edit_task input[type=checkbox]");
+    checkboxes.forEach(function(box) {
+        box.addEventListener("click", function(e) {
+            box.parentElement.submit();        
+        });
+            
+    });
 });

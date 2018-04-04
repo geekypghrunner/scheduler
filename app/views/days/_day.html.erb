@@ -1,0 +1,23 @@
+<div class="col-sm-3" >
+  <div class="card my-2">
+    <div class="card-header">
+      <%= day.date %>
+    </div>
+    <div class="card-body" id="cal_content">
+      <ul>
+        <% @events.select{ |event| event.start.date == day.date || (if !(event.start.date_time.nil?) then event.start.date_time.to_date.to_s == day.date end)}.each do |event| %>
+          <li>
+            <% if defined? event.start.date_time %>
+              <%= event.start.date_time %>
+            <% end %>
+            <%= event.summary %>
+          </li>
+        <% end %>
+      </ul>
+      <hr>
+      <ul>
+        <%= render @tasks.where("date = ?", day.date) %>
+      </ul>
+    </div>
+  </div>
+</div>

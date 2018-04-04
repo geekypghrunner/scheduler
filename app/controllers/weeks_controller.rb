@@ -10,6 +10,14 @@ class WeeksController < ApplicationController
             week.end = ((Week.find(params[:id]).end).to_datetime + 7).rfc3339()
             week.prior_week = params[:id]
         end
+        
+        7.times do |i|
+            Day.find_or_create_by(date: (@week.start.to_date + i).to_s, user_id: current_user.id) do |day|
+                day.user_id = current_user.id
+                day.week_id = @week.id
+                day.date = (@week.start.to_date + i).to_s
+            end
+        end
         redirect_to user_week_path(user_id: current_user.id, id: @week.id)
     end
     
@@ -17,11 +25,9 @@ class WeeksController < ApplicationController
         @week = Week.find(params[:id])
         @events = events("primary", @week.start, @week.end).items
         @tasks = current_user.tasks
-        7.times do |i|
-            instance_variable_set("@day_events#{i}", @events.select{ |event| event.start.date == (@week.start.to_date + i).to_s || (if !(event.start.date_time.nil?) then event.start.date_time.to_date.to_s == (@week.start.to_date + i).to_s end)})
-            instance_variable_set("@day_tasks#{i}", @tasks.where("date = ?", @week.start.to_date + i))
-        end
-        @todos = @tasks.where("todo = ?", true)    
+        @days = @week.days
+        @incomplete_todos = @tasks.where("todo = ? AND completed = ?", true, false)
+        @complete_todos = @tasks.where("todo = ? AND completed = ?", true, true )
     end
     
     def index

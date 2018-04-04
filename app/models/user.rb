@@ -1,7 +1,15 @@
 class User < ApplicationRecord
   
+  after_create do 
+    @week = Week.create(:user_id => User.last.id, :start => (DateTime.now-DateTime.now.strftime("%w").to_i).to_date.to_datetime.change(:offset => "-0400").to_s, :end => ((DateTime.now-DateTime.now.strftime("%w").to_i).to_date.to_datetime.change(:offset => "-0400")+6).change(hour: 23, min: 59, sec: 59))
+    7.times do |i|
+      Day.create(:user_id => User.last.id, :week_id => @week.id, :date => (@week.start.to_date + i).to_s)
+    end
+  end
+  
   has_many :weeks
   has_many :tasks
+  has_many :days
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, 
