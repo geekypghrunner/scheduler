@@ -12,7 +12,7 @@
     <header>
     <div class"container">
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-      <a class="navbar-brand" href="#">Scheduler App</a>
+      <a class="navbar-brand" href="#">Week to Week App</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -69,5 +69,10 @@
   <div class="container">
     <%= yield %>
   </div>
+  <footer class="footer">
+    <div class="container">
+      <%= link_to "Privacy", privacy_path, :class => "ml-auto" %>
+    </div>
+  </footer>
   </body>
 </html>

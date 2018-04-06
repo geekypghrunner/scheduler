@@ -7,9 +7,9 @@ class User < ApplicationRecord
     end
   end
   
-  has_many :weeks
-  has_many :tasks
-  has_many :days
+  has_many :weeks, :dependent => :destroy
+  has_many :tasks, :dependent => :destroy
+  has_many :days, :dependent => :destroy
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, 
