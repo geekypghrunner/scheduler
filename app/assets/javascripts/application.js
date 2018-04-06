@@ -53,14 +53,3 @@ $( document ).ready(function() {
 //  });
 
 });
-
-
- document.addEventListener("page:change", function() {   
-    let checkboxes = document.querySelectorAll(".edit_task input[type=checkbox]");
-    checkboxes.forEach(function(box) {
-        box.addEventListener("click", function(e) {
-            box.parentElement.submit();        
-        });
-            
-    });
-});
