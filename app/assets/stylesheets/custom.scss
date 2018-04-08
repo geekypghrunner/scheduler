@@ -14,9 +14,13 @@ body {
     background: "blue";
 }
 
-#complete_todo_list {
+#complete_todo_list, #complete_daily_task {
     label {
     text-decoration: line-through;}
+}
+
+.update_button {
+    display: none;
 }
 
 .footer {

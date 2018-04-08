@@ -16,12 +16,14 @@
     <div class="card-header">
       To Do
     </div>
-    <div class="card-body" id="incomplete_todo_list">
-      <%= render @incomplete_todos %>
-    </div>
-    <hr>
-    <div class="card-body" id="complete_todo_list">
-      <%= render @complete_todos %>
+    <div class="card-body">
+      <div id="incomplete_todo_list">
+        <%= render @incomplete_todos %>
+      </div>
+      <hr>
+      <div id="complete_todo_list">
+        <%= render @complete_todos %>
+      </div>
     </div>
   </div>
 </div>

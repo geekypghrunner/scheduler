@@ -1,6 +1,6 @@
 <%= form_for task, remote: true, method: :patch, :url => {:controller => "tasks", :action => "update", :id => task.id, :user_id => current_user.id, :week_id => (params.has_key?("week_id") ? params[:week_id] : params[:id])}, authenticity_token: true do |f| %>
-  <%= f.check_box :completed %>
-  <%= f.submit "Update" %>
+  <%= f.check_box :completed, :class => "checking" %>
+  <%= f.submit "Update", :class => "update_button" %>
   <%= f.label :completed, task.summary %>
   <%= link_to "(remove)", user_task_path(current_user, task, :week_id => (params.has_key?("week_id") ? params[:week_id] : params[:id])), method: :delete, data: {confirm: "Are you sure?"}, remote: true %>
 <% end %>

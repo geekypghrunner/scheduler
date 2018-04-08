@@ -21,7 +21,7 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 
-$( document ).ready(function() {
+$( document ).on('turbolinks:load', function() {
     $("input[id=daily_task]").click(function() {
         if($(this).is(':checked')) {
             $('#todo_date').css('display', 'block');
@@ -41,15 +41,16 @@ $( document ).ready(function() {
         }
     });    
     $("#new_task").bind("ajax:complete", function(event,xhr,status){
-        $("input[name=summary").val('');
+        $("input[name=summary]").val('');
         $("input[name=date]").val('');
         $("input[name=todo]").prop("checked","checked");
         $("input[id=daily_task]").prop("checked","");
         $('#todo_date').css('display', 'none');
     });
-//    $(".edit_task").find('input[type=submit]').remove();
-//    $(".edit_task").find('input[type=checkbox]').click(function(event) {
-//        $(this).parent('form').submit();
-//  });
-
+    
+    
+    $(document).on("click", ".checking", function(event) {
+        $(this).siblings("input[value=Update]").trigger("click");
+    });
+    
 });
