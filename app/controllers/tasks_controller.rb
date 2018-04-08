@@ -9,7 +9,21 @@ class TasksController < ApplicationController
         @task.completed = false
         @task.save
         @week = Week.find(params[:id])
-        @events = events("primary", @week.start, @week.end).items
+        @events = []
+        calendars.items.each do |calendar| 
+            @events += events(calendar.id, @week.start, @week.end).items 
+        end
+        @events.sort! {|a,b| 
+            if !(a.start.date_time.nil?) && !(b.start.date_time.nil?) 
+                a.start.date_time <=> b.start.date_time
+            elsif !(a.start.date_time.nil?) && !(b.start.date.nil?)
+                a.start.date_time <=> b.start.date 
+            elsif !(a.start.date.nil?) && !(b.start.date_time.nil?)
+                a.start.date <=> b.start.date_time 
+            else
+                a.start.date <=> b.start.date
+            end
+        }
         @tasks = current_user.tasks
         @days = @week.days
         @incomplete_todos = @tasks.where("todo = ? AND completed = ?", true, false)
@@ -25,7 +39,21 @@ class TasksController < ApplicationController
         @tasks = current_user.tasks
         @week = Week.find(params[:week_id])
         @days = @week.days
-        @events = events("primary", @week.start, @week.end).items
+        @events = []
+        calendars.items.each do |calendar| 
+            @events += events(calendar.id, @week.start, @week.end).items 
+        end
+        @events.sort! {|a,b| 
+            if !(a.start.date_time.nil?) && !(b.start.date_time.nil?) 
+                a.start.date_time <=> b.start.date_time
+            elsif !(a.start.date_time.nil?) && !(b.start.date.nil?)
+                a.start.date_time <=> b.start.date 
+            elsif !(a.start.date.nil?) && !(b.start.date_time.nil?)
+                a.start.date <=> b.start.date_time 
+            else
+                a.start.date <=> b.start.date
+            end
+        }
         @incomplete_todos = @tasks.where("todo = ? AND completed = ?", true, false)
         @complete_todos = @tasks.where("todo = ? AND completed = ?", true, true)
         respond_to do |format|
@@ -38,7 +66,21 @@ class TasksController < ApplicationController
         @task = Task.destroy(params[:id])
         @tasks = current_user.tasks
         @week = Week.find(params[:week_id])
-        @events = events("primary", @week.start, @week.end).items
+        @events = []
+        calendars.items.each do |calendar| 
+            @events += events(calendar.id, @week.start, @week.end).items 
+        end
+        @events.sort! {|a,b| 
+            if !(a.start.date_time.nil?) && !(b.start.date_time.nil?) 
+                a.start.date_time <=> b.start.date_time
+            elsif !(a.start.date_time.nil?) && !(b.start.date.nil?)
+                a.start.date_time <=> b.start.date 
+            elsif !(a.start.date.nil?) && !(b.start.date_time.nil?)
+                a.start.date <=> b.start.date_time 
+            else
+                a.start.date <=> b.start.date
+            end
+        }
         @days = @week.days
         @incomplete_todos = @tasks.where("todo = ? AND completed = ?", true, false)
         @complete_todos = @tasks.where("todo = ? AND completed = ?", true, true)
