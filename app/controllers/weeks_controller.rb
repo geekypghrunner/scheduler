@@ -1,6 +1,7 @@
 class WeeksController < ApplicationController
     
     respond_to :html, :js
+    before_action :authorized_user!
     
     def create
          next_week_start = ((Week.find(params[:id]).start).to_datetime + 7).rfc3339()

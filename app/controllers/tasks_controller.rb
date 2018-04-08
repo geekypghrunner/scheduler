@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
 
   respond_to :html, :js
-
+    
+    before_action :authorized_user!
     before_action :modify_date_param, only: [:create]
     
     def create

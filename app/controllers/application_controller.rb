@@ -50,4 +50,11 @@ class ApplicationController < ActionController::Base
 #    render json: response
   end
 
+  def authorized_user!
+    if params[:user_id] != current_user.id.to_s
+      redirect_to root_path
+    end
+  end
+
+
 end
