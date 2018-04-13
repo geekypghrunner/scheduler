@@ -1,5 +1,5 @@
-<div class="col-md-3" >
-  <div class="card my-2">
+<div class="col-lg-3" >
+  <div class="card my-2" id="<%= day.date %>">
     <div class="card-header">
       <%= day.date.to_date.strftime("%-m-%-d-%Y") %>
     </div>
@@ -18,7 +18,7 @@
         <div id="incomplete_daily_task">
           <%= render @tasks.where("date = ? AND completed = ?", day.date, false) %>
         </div>
-        <div id="complete_daily_task">
+        <div id="complete_daily_task" class="completed">
           <%= render @tasks.where("date = ? AND completed = ?", day.date, true) %>
         </div>
     </div>

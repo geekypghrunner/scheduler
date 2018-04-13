@@ -26,8 +26,12 @@ class WeeksController < ApplicationController
         @week = Week.find(params[:id])
         @days = @week.days
         @tasks = current_user.tasks
-        @incomplete_todos = @tasks.where("todo = ? AND completed = ?", true, false)
-        @complete_todos = @tasks.where("todo = ? AND completed = ?", true, true )
+        @incomplete_home_todos = @tasks.where("todo = ? AND completed = ? AND task_type = ?", true, false, "home")
+        @complete_home_todos = @tasks.where("todo = ? AND completed = ? AND task_type = ?", true, true, "home" )
+        @incomplete_work_todos = @tasks.where("todo = ? AND completed = ? AND task_type = ?", true, false, "work")
+        @complete_work_todos = @tasks.where("todo = ? AND completed = ? AND task_type = ?", true, true, "work")
+        @incomplete_buy_todos = @tasks.where("todo = ? AND completed = ? AND task_type = ?", true, false, "buy")
+        @complete_buy_todos = @tasks.where("todo = ? AND completed = ? AND task_type = ?", true, true, "buy")
         @events = []
         calendars.items.each do |calendar| 
             @events += events(calendar.id, @week.start, @week.end).items 

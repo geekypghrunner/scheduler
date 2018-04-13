@@ -12,18 +12,54 @@
   </div>
 </div>
 <div class="container">
-  <div class="card my-2">
-    <div class="card-header">
-      To Do
-    </div>
-    <div class="card-body">
-      <div id="incomplete_todo_list">
-        <%= render @incomplete_todos %>
+  <div class="row" id="todo_grid">
+    <div class="col-lg-4">
+      <div class="card my-2">
+        <div class="card-header">
+          Home To Do
+        </div>
+        <div class="card-body">
+          <div id="incomplete_home_todo_list">
+            <%= render @incomplete_home_todos %>
+          </div>
+          <hr>
+          <div id="complete_home_todo_list" class="completed">
+            <%= render @complete_home_todos %>
+          </div>
+        </div>
       </div>
-      <hr>
-      <div id="complete_todo_list">
-        <%= render @complete_todos %>
       </div>
-    </div>
+          <div class="col-lg-4">
+            <div class="card my-2">
+        <div class="card-header">
+          Work To Do
+        </div>
+        <div class="card-body">
+          <div id="incomplete_work_todo_list">
+            <%= render @incomplete_work_todos %>
+          </div>
+          <hr>
+          <div id="complete_work_todo_list" class="completed">
+            <%= render @complete_work_todos %>
+          </div>
+        </div>
+      </div>
+      </div>
+          <div class="col-lg-4">
+            <div class="card my-2">
+        <div class="card-header">
+          Need to Buy
+        </div>
+        <div class="card-body">
+          <div id="incomplete_buy_todo_list">
+            <%= render @incomplete_buy_todos %>
+          </div>
+          <hr>
+          <div id="complete_buy_todo_list" class="completed">
+            <%= render @complete_buy_todos %>
+          </div>
+        </div>
+      </div>
+    </div>  
   </div>
 </div>

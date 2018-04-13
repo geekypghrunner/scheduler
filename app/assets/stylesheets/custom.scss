@@ -14,7 +14,7 @@ body {
     background: "blue";
 }
 
-#complete_todo_list, #complete_daily_task {
+.completed {
     label {
     text-decoration: line-through;}
 }

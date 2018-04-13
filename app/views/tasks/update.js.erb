@@ -1,3 +1,7 @@
-$('#cal_grid').html('<%= j render @days %>')
-$('#incomplete_todo_list').html('<%= j render @incomplete_todos %>')
-$('#complete_todo_list').html('<%= j render @complete_todos %>')
+if (<%= @task.todo %>) {
+    $('#incomplete_<%= @task.task_type %>_todo_list').html('<%= j render @tasks.where("todo = ? AND completed = ? AND task_type = ?", true, false, @task.task_type) %>')
+    $('#complete_<%= @task.task_type %>_todo_list').html('<%= j render @tasks.where("todo = ? AND completed = ? AND task_type = ?", true, true, @task.task_type) %>')
+} else if (<%= ((@week.start.to_datetime - 1)..@week.end.to_datetime).cover?(@task.date.to_datetime) %>) {
+    $('#<%= @task.date %>').find('#incomplete_daily_task').html('<%= j render @tasks.where("date = ? AND completed = ?", @task.date, false) %>')
+    $('#<%= @task.date %>').find('#complete_daily_task').html('<%= j render @tasks.where("date = ? AND completed = ?", @task.date, true) %>')
+}
