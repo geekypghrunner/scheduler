@@ -33,8 +33,8 @@ class WeeksController < ApplicationController
         @incomplete_buy_todos = @tasks.where("todo = ? AND completed = ? AND task_type = ?", true, false, "buy")
         @complete_buy_todos = @tasks.where("todo = ? AND completed = ? AND task_type = ?", true, true, "buy")
         @events = []
-        calendars.items.each do |calendar| 
-            @events += events(calendar.id, @week.start, @week.end).items 
+        current_user.cal_list.each do |calendar| 
+            @events += events(calendar, @week.start, @week.end).items 
         end
         @events.sort! {|a,b| 
             if !(a.start.date_time.nil?) && !(b.start.date_time.nil?) 
