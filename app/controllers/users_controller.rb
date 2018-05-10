@@ -17,6 +17,12 @@ class UsersController < ApplicationController
     
     def update
         @user = current_user
-        @user.update(:cal_list => params[:user][:cal_list])
+        @user.update(user_params)
     end
+
+    private
+        def user_params
+            params.require(:user).permit(:cal_list => [])
+        end
+
 end
