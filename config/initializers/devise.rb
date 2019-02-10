@@ -288,6 +288,8 @@ Devise.setup do |config|
 
   # Configure Google omniauth with proper scope
   config.omniauth :google_oauth2, client_id, client_secret, {
+    access_type: "offline",
+    prompt: "consent",
     scope: "calendar,userinfo.email,userinfo.profile"
   }
 

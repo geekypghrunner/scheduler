@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   protect_from_forgery prepend: true
 
-  
   Calendar = Google::Apis::CalendarV3
 
   def calendars
@@ -22,11 +21,8 @@ class ApplicationController < ActionController::Base
     )
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = secrets.to_authorization
-
+    service.authorization.refresh!
     @calendar_list = service.list_calendar_lists
-
-#    response = service.list_calendar_lists
-#    render json: response
   end
 
   def events(id, start_date, end_date)
@@ -43,11 +39,9 @@ class ApplicationController < ActionController::Base
     )
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = secrets.to_authorization
+    service.authorization.refresh!
 
     @event_list = service.list_events(id, order_by: "starttime", single_events: true, time_min: start_date, time_max: end_date, fields: "items(summary,id,start(date_time, date))")
-
-#    response = service.list_calendar_lists
-#    render json: response
   end
 
   def authorized_user!
@@ -55,6 +49,5 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
-
 
 end
