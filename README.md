@@ -7,3 +7,7 @@ To-do application with Google Calendar integration allowing for tracking of pers
 * Ruby on Rails
 * Google Calendar API
 * PostgreSQL
+
+## Deployment
+
+The site is available at https://week-to-week.herokuapp.com.
