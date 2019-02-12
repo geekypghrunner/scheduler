@@ -1,24 +1,9 @@
-# README
+## Description
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To-do application with Google Calendar integration allowing for tracking of personal and work tasks in general or on specific days.
 
-Things you may want to cover:
+## Technologies
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Ruby on Rails
+* Google Calendar API
+* PostgreSQL

@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   Calendar = Google::Apis::CalendarV3
 
+  
+
   def calendars
     secrets = Google::APIClient::ClientSecrets.new(
       {
